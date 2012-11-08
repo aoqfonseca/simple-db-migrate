@@ -171,14 +171,14 @@ class MigrationTest(BaseTest):
         delete_files('*test_migration.migration')
 
     def test_it_should_have_generate_file_method(self):
-        assert self.migration.generate_file, "Should have generate file method"
+        assert self.migration.dumps_to_file, "Should have generate file method"
 
     def test_it_should_generate_migration_file(self):
-        self.migration.generate_file()
+        self.migration.dumps_to_file()
         assert os.path.exists("20120101010100_generate_test_migration.migration"), "File should exists"
 
     def test_it_should_generate_migration_with_rigth_content(self):
-        self.migration.generate_file()
+        self.migration.dumps_to_file()
         migration_expected = Migration("20120101010100_generate_test_migration.migration")
         assert self.migration.sql_up in migration_expected.sql_up
         assert self.migration.sql_down in  migration_expected.sql_down

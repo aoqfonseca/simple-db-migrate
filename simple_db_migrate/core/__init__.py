@@ -1,11 +1,8 @@
+# -*- coding: utf-8 -*-
 from time import strftime, gmtime, localtime
 import codecs
 import os
-import shutil
 import re
-import imp
-import tempfile
-import sys
 from simple_db_migrate.helpers import Utils
 
 class Migration(object):
@@ -74,7 +71,7 @@ class Migration(object):
         dict_2['id'] = dict_2['abspath'] = None
         return dict_1 == dict_2
 
-    def generate_file(self):
+    def dumps_to_file(self):
         file_name = "%s_%s%s" % (self.version, self.label, Migration.MIGRATION_FILES_EXTENSION)
         content = '#-*- coding:%s -*-\nSQL_UP = u"""\n %s \n"""\n\nSQL_DOWN = u"""\n %s \n"""\n' % (self.script_encoding,
                                                                                                     self.sql_up,
